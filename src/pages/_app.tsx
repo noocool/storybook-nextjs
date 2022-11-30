@@ -1,8 +1,23 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { NextComponentType } from "next";
+import type { AppProps } from "next/app";
+import React from "react";
+import "../styles/style.scss";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+export type IPageProps = {
+  Layout: React.Component;
+  layoutProps: {};
+};
+
+function MyApp({
+  Component,
+  pageProps,
+}: {
+  Component: NextComponentType & IPageProps;
+  pageProps: {};
+}) {
+  const Layout = Component.Layout ?? React.Fragment;
+  const layoutProps = Component.layoutProps ?? {};
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default MyApp;
